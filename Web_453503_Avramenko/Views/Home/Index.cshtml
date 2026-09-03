@@ -1,65 +1,6 @@
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
 }
-
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-    <title>Index</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/Web_453503_Avramenko.styles.css" asp-append-version="true"/>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <nav class="navbar bg-dark navbar-expand-md border-bottom border-body"
-                 data-bs-theme="dark">
-            <!-- меню сайта -->
-            <a class="navbar-brand" href="#">45350001</a>
-            <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Лб 1</a>
-                <a class="nav-item nav-link" href="#">Каталог</a>
-                <a class="nav-item nav-link" href="#">Администрирование</a>
-            </div>
-            <!-- меню сайта - конец -->
-            <!-- Информация пользователя -->
-            <a href="#" class="navbar-text ms-auto">
-                00,0 руб <i class="bi bi-cart"></i> (0)
-            </a>
-            <div class="dropdown ms-4 nav-color">
-                <button class="btn btn-secondary dropdown-toggle"
-                        type="button" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    User@gmail.com
-                    <img src="images/default-profile-picture.jpeg" width="30"
-                         alt="User" class="rounded nav-color" />
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
-                <span class="dropdown-item-text">
-                    <img src="images/default-profile-picture.jpeg"
-                         width="50" alt="User" class="rounded" />
-                    user@gmail.com
-                </span>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                    <form id="logoutForm" class="form-inline">
-                        <button id="logout" type="submit" class="nav-link
-    btn btn-link">Logout</button>
-                    </form>
-                </li>
-                </ul>
-            </div>
-            <!-- Информация пользователя - конец -->
-            </nav> <!-- Панель навигации - конец -->
-        </div><!-- container - конец -->
-    </header><!-- header - конец -->
-    <main class="container">
         <h1 class="mt-4">Лабораторная Работа 1</h1>
 
         <h2 class="mt-4">Список</h2>
@@ -127,27 +68,3 @@
 
             <button type="submit" class="btn btn-primary">Отправить</button>
         </form>
-    </main>
-    <footer>
-        <div class="container">
-            <div class="navbar bg-dark navbar-expand-md border-bottom border-body"
-                 data-bs-theme="dark">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-item nav-link" href="http://www.facebook.com">
-                        <i class="bi bi-facebook" style="font-size: 2rem"></i>
-                    </a>
-                    <a class="nav-item nav-link" href="http://www.vk.com">
-                        <i class="bi bi-twitter" style="font-size: 2rem"></i>
-                    </a>
-                    <a class="nav-item nav-link" href="http://www.x.com">
-                        <i class="bi-telegram" style="font-size: 2rem"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</body>
-</html>

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Web_453503_Avramenko")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f1b28eab74ad0d891b77b557429dda9f7ff439e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Web_453503_Avramenko")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Web_453503_Avramenko")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

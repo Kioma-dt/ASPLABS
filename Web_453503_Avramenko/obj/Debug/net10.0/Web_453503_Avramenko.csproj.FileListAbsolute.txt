@@ -18,9 +18,7 @@
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/rjimswa.dswa.cache.json
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/rjsmrazor.dswa.cache.json
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/rjsmcshtml.dswa.cache.json
-/home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/scopedcss/bundle/Web_453503_Avramenko.styles.css
-/home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/scopedcss/projectbundle/Web_453503_Avramenko.bundle.scp.css
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/xihfi7qpts-{0}-61n19gt1b8-61n19gt1b8.gz
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/l8rqs56y6e-{0}-fr7q2aak1r-fr7q2aak1r.gz
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/ypn993wug2-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -82,8 +80,6 @@
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/uxlyr257zz-{0}-muycvpuwrr-muycvpuwrr.gz
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/6z9ltjasg4-{0}-87fc7y1x7t-87fc7y1x7t.gz
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/wvfnpr8lg3-{0}-jfsiqqwiad-jfsiqqwiad.gz
-/home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/f47drzszlu-{0}-yrghu5zcfv-yrghu5zcfv.gz
-/home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/r20ryxxpjq-{0}-yrghu5zcfv-yrghu5zcfv.gz
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/staticwebassets.build.json
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/staticwebassets.build.json.cache
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/staticwebassets.development.json
@@ -2177,3 +2173,4 @@
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/1ji9l60lhp-{0}-w8kxt40k85-w8kxt40k85.gz
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/qkzuzfrbqu-{0}-cj4ojh8vq2-cj4ojh8vq2.gz
 /home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/compressed/jfgpb7rjmg-{0}-tpa8tcwxyn-tpa8tcwxyn.gz
+/home/kioma/Documents/ASPLABS/Web_453503_Avramenko/Web_453503_Avramenko/obj/Debug/net10.0/Web_453503_Avramenko.sourcelink.json
