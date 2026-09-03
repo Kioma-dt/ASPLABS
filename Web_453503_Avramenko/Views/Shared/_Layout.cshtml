@@ -14,46 +14,10 @@
             <nav class="navbar bg-dark navbar-expand-md border-bottom border-body"
                  data-bs-theme="dark">
             <!-- меню сайта -->
-            <a class="navbar-brand" href="#">45350001</a>
-            <div class="navbar-nav">
-                <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Лб 1</a>
-                <a class="nav-item nav-link" asp-controller="Product" asp-action="Index">Каталог</a>
-                <a class="nav-item nav-link" asp-area="Admin" asp-page="/Index">Администрирование</a>
-            </div>
+            <partial name="_MenuPartial"></partial>
             <!-- меню сайта - конец -->
             <!-- Информация пользователя -->
-            <a class="navbar-text ms-auto" asp-controller="Cart" asp-action="Index">
-                00,0 руб <i class="bi bi-cart"></i> (0)
-            </a>
-            <div class="dropdown ms-4 nav-color">
-                <button class="btn btn-secondary dropdown-toggle"
-                        type="button" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    User@gmail.com
-                    <img src="images/default-profile-picture.jpeg" width="30"
-                         alt="User" class="rounded nav-color" />
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
-                <span class="dropdown-item-text">
-                    <img src="images/default-profile-picture.jpeg"
-                         width="50" alt="User" class="rounded" />
-                    User@gmail.com
-                </span>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                    <form id="logoutForm" class="form-inline">
-                        <button id="logout" type="submit"
-                                class="nav-linkbtn btn-link"
-                                asp-controller="Account" asp-action="LogOut">
-                            Logout
-                        </button>
-                    </form>
-                </li>
-                </ul>
-            </div>
+            <partial name="_UserInfoPartial"></partial>
             <!-- Информация пользователя - конец -->
             </nav> <!-- Панель навигации - конец -->
         </div><!-- container - конец -->
