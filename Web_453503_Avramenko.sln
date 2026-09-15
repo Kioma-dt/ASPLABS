@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_453503_Avramenko", "Web_453503_Avramenko\Web_453503_Avramenko.csproj", "{64D9BA66-235B-4D8F-B8A4-B715A3CCF64A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_453503_Avramenko.UI", "Web_453503_Avramenko.UI\Web_453503_Avramenko.UI.csproj", "{64D9BA66-235B-4D8F-B8A4-B715A3CCF64A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_453503_Avramenko.Domain", "Web_453503_Avramenko.Domain\Web_453503_Avramenko.Domain.csproj", "{D1FAEB1E-3E67-4F1C-BADB-D030CE30C8F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +14,9 @@ Global
 		{64D9BA66-235B-4D8F-B8A4-B715A3CCF64A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64D9BA66-235B-4D8F-B8A4-B715A3CCF64A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64D9BA66-235B-4D8F-B8A4-B715A3CCF64A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1FAEB1E-3E67-4F1C-BADB-D030CE30C8F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1FAEB1E-3E67-4F1C-BADB-D030CE30C8F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1FAEB1E-3E67-4F1C-BADB-D030CE30C8F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1FAEB1E-3E67-4F1C-BADB-D030CE30C8F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
