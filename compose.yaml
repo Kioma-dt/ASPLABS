@@ -23,9 +23,8 @@
       - "5454:5454"
     networks:
       - postgres_network
-    depends_on:
+    depends_on: 
       - postgres
-
 volumes:
   postgres_data:
     driver: local

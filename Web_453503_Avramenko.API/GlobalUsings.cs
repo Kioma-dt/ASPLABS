@@ -1,0 +1,1 @@
+global using Web_453503_Avramenko.Domain.Entities;
