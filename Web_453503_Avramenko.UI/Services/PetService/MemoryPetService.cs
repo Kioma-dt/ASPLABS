@@ -65,7 +65,7 @@ public class MemoryPetService
                 Weight = 5,
                 Species = _species.Find(s => s.NormalizedName.Equals("cat")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("cat"))?.Id,
-                Image = "../images/Tom.jpg"
+                Image = "../images/Tom.jpeg"
             },
             new Pet()
             {
@@ -75,7 +75,7 @@ public class MemoryPetService
                 Weight = 4.2,
                 Species = _species.Find(s => s.NormalizedName.Equals("cat")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("cat"))?.Id,
-                Image = "../images/Luna.jpg"
+                Image = "../images/Luna.jpeg"
             },
             new Pet()
             {
@@ -85,7 +85,7 @@ public class MemoryPetService
                 Weight = 6.1,
                 Species = _species.Find(s => s.NormalizedName.Equals("cat")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("cat"))?.Id,
-                Image = "../images/Oliver.jpg"
+                Image = "../images/Oliver.jpeg"
             },
             new Pet()
             {
@@ -95,7 +95,7 @@ public class MemoryPetService
                 Weight = 5.5,
                 Species = _species.Find(s => s.NormalizedName.Equals("cat")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("cat"))?.Id,
-                Image = "../images/Milo.jpg"
+                Image = "../images/Milo.jpeg"
             },
 
             new Pet()
@@ -106,7 +106,7 @@ public class MemoryPetService
                 Weight = 12,
                 Species = _species.Find(s => s.NormalizedName.Equals("dog")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("dog"))?.Id,
-                Image = "../images/Buddy.jpg"
+                Image = "../images/Buddy.jpeg"
             },
             new Pet()
             {
@@ -116,7 +116,7 @@ public class MemoryPetService
                 Weight = 18.5,
                 Species = _species.Find(s => s.NormalizedName.Equals("dog")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("dog"))?.Id,
-                Image = "../images/Max.jpg"
+                Image = "../images/Max.jpeg"
             },
             new Pet()
             {
@@ -126,7 +126,7 @@ public class MemoryPetService
                 Weight = 9.8,
                 Species = _species.Find(s => s.NormalizedName.Equals("dog")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("dog"))?.Id,
-                Image = "../images/Bella.jpg"
+                Image = "../images/Bella.jpeg"
             },
             new Pet()
             {
@@ -136,7 +136,7 @@ public class MemoryPetService
                 Weight = 22,
                 Species = _species.Find(s => s.NormalizedName.Equals("dog")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("dog"))?.Id,
-                Image = "../images/Rocky.jpg"
+                Image = "../images/Rocky.jpeg"
             },
 
             new Pet()
@@ -147,7 +147,7 @@ public class MemoryPetService
                 Weight = 0.4,
                 Species = _species.Find(s => s.NormalizedName.Equals("pigeon")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("pigeon"))?.Id,
-                Image = "../images/Charlie.jpg"
+                Image = "../images/Charlie.jpeg"
             },
             new Pet()
             {
@@ -157,7 +157,7 @@ public class MemoryPetService
                 Weight = 0.35,
                 Species = _species.Find(s => s.NormalizedName.Equals("pigeon")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("pigeon"))?.Id,
-                Image = "../images/Sky.jpg"
+                Image = "../images/Sky.jpeg"
             },
             new Pet()
             {
@@ -167,7 +167,7 @@ public class MemoryPetService
                 Weight = 0.42,
                 Species = _species.Find(s => s.NormalizedName.Equals("pigeon")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("pigeon"))?.Id,
-                Image = "../images/Pearl.jpg"
+                Image = "../images/Pearl.jpeg"
             },
 
             new Pet()
@@ -178,7 +178,7 @@ public class MemoryPetService
                 Weight = 0.15,
                 Species = _species.Find(s => s.NormalizedName.Equals("hamster")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("hamster"))?.Id,
-                Image = "../images/Nibbles.jpg"
+                Image = "../images/Nibbles.jpeg"
             },
             new Pet()
             {
@@ -188,7 +188,7 @@ public class MemoryPetService
                 Weight = 0.13,
                 Species = _species.Find(s => s.NormalizedName.Equals("hamster")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("hamster"))?.Id,
-                Image = "../images/Peanut.jpg"
+                Image = "../images/Peanut.jpeg"
             },
             new Pet()
             {
@@ -198,7 +198,7 @@ public class MemoryPetService
                 Weight = 0.17,
                 Species = _species.Find(s => s.NormalizedName.Equals("hamster")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("hamster"))?.Id,
-                Image = "../images/Cookie.jpg"
+                Image = "../images/Cookie.jpeg"
             },
 
             new Pet()
@@ -209,7 +209,7 @@ public class MemoryPetService
                 Weight = 0.8,
                 Species = _species.Find(s => s.NormalizedName.Equals("guinea-pig")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("guinea-pig"))?.Id,
-                Image = "../images/Coco.jpg"
+                Image = "../images/Coco.jpeg"
             },
             new Pet()
             {
@@ -219,7 +219,7 @@ public class MemoryPetService
                 Weight = 0.95,
                 Species = _species.Find(s => s.NormalizedName.Equals("guinea-pig")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("guinea-pig"))?.Id,
-                Image = "../images/Mochi.jpg"
+                Image = "../images/Mochi.jpeg"
             },
             new Pet()
             {
@@ -229,7 +229,7 @@ public class MemoryPetService
                 Weight = 0.75,
                 Species = _species.Find(s => s.NormalizedName.Equals("guinea-pig")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("guinea-pig"))?.Id,
-                Image = "../images/Pip.jpg"
+                Image = "../images/Pip.jpeg"
             },
 
             new Pet()
@@ -240,7 +240,7 @@ public class MemoryPetService
                 Weight = 0.02,
                 Species = _species.Find(s => s.NormalizedName.Equals("spider")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("spider"))?.Id,
-                Image = "../images/Webster.jpg"
+                Image = "../images/Webster.jpeg"
             },
             new Pet()
             {
@@ -250,7 +250,7 @@ public class MemoryPetService
                 Weight = 0.015,
                 Species = _species.Find(s => s.NormalizedName.Equals("spider")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("spider"))?.Id,
-                Image = "../images/Shadow.jpg"
+                Image = "../images/Shadow.jpeg"
             },
             new Pet()
             {
@@ -260,7 +260,7 @@ public class MemoryPetService
                 Weight = 0.018,
                 Species = _species.Find(s => s.NormalizedName.Equals("spider")),
                 SpeciesId = _species.Find(s => s.NormalizedName.Equals("spider"))?.Id,
-                Image = "../images/Ruby.jpg"
+                Image = "../images/Ruby.jpeg"
             }
         });
     }
