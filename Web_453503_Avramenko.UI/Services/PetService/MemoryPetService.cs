@@ -5,10 +5,15 @@ public class MemoryPetService
 {
     readonly List<Pet> _pets = new();
     readonly List<Species> _species = new();
+    private readonly IConfiguration _configuration;
     
 
-    public MemoryPetService(ISpeciesService speciesService)
+    public MemoryPetService(
+        ISpeciesService speciesService,
+        IConfiguration configuration)
     {
+        _configuration = configuration;
+        
         _species = speciesService.GetSpeciesListAsync()
                        .Result
                        .Data
@@ -21,14 +26,28 @@ public class MemoryPetService
         string? speciesNormalizedName, 
         int pageNo = 1)
     {
-        var items = new ListModel<Pet>()
+        var pageSize = _configuration.GetValue<int>("ItemsPerPage");
+        
+        var count = _pets
+            .Count(p => speciesNormalizedName is null
+                        || (p?.Species?.NormalizedName.Equals(speciesNormalizedName) ?? false));
+        var totalPages = (int) Math.Ceiling((double)count / pageSize);
+        
+        var items = _pets
+            .Where(p => speciesNormalizedName is null
+                                     || (p?.Species?.NormalizedName.Equals(speciesNormalizedName) ?? false))
+            .Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+        
+        var data = new ListModel<Pet>()
         {
-            Items = _pets,
+            Items = items,
             CurrentPage = pageNo,
-            TotalPages = pageNo
+            TotalPages = totalPages
         };
 
-        var result = ResponseData<ListModel<Pet>>.Success(items);
+        var result = ResponseData<ListModel<Pet>>.Success(data);
 
         return Task.FromResult(result);
     }

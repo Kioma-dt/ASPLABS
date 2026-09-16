@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/Web_453503_Avramenko.UI.styles.css" asp-append-version="true"/>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <div class="container">
             <nav class="navbar bg-dark navbar-expand-md border-bottom border-body"
@@ -20,10 +20,10 @@
             </nav>
         </div>
     </header>
-    <main class="container">
+    <main class="container flex-grow-1">
         @RenderBody()
     </main>
-    <footer class="fixed-bottom">
+    <footer class="mt-auto">
         <div class="container">
             <div class="navbar bg-dark navbar-expand-md border-bottom border-body"
                  data-bs-theme="dark">
