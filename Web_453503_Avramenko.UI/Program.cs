@@ -1,11 +1,21 @@
+using Web_453503_Avramenko.UI;
 using Web_453503_Avramenko.UI.Extensions;
+using Web_453503_Avramenko.UI.Services.PetService;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+var uriData = builder.Configuration.GetSection("UriData").Get<UriData>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.RegisterCustomServices();
+//! builder.RegisterCustomServices();
+
+builder.Services.AddHttpClient<IPetService, ApiPetService>(opt
+    => opt.BaseAddress = new Uri(uriData?.ApiUri+"pet"));
+builder.Services.AddHttpClient<ISpeciesService, ApiSpeciesService>(opt 
+    => opt.BaseAddress = new Uri(uriData?.ApiUri+"species"));
 
 var app = builder.Build();
 
