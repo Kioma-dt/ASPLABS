@@ -31,11 +31,9 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-//app.MapControllers();
+app.MapControllers();
 app.MapIEndpoints();
 
 app.MapPetEndpoints();
-
-app.MapSpeciesEndpoints();
 
 app.Run();
