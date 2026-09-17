@@ -27,7 +27,7 @@ public class ApiPetService
     
     public async Task<ResponseData<ListModel<Pet>>> GetPetListAsync(string? speciesNormalizedName, int pageNo = 1)
     {
-        var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}/");
+        var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
         
         if (speciesNormalizedName is not null)
         {
@@ -77,6 +77,26 @@ public class ApiPetService
 
     public async Task<ResponseData<Pet>> CreatePetAsync(Pet pet, IFormFile? formFile)
     {
-        throw new NotImplementedException();
+        pet.Image = "images/noimage.jpeg";
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Post,
+            RequestUri = _httpClient.BaseAddress
+        };
+        request.Content =
+            new StringContent(JsonSerializer.Serialize(pet));
+        var response = await _httpClient.SendAsync(
+            request,
+            CancellationToken.None);
+        if (response.IsSuccessStatusCode)
+        {
+            var responseData = await response
+                .Content
+                .ReadFromJsonAsync<ResponseData<Pet>> (_serializerOptions);
+            return responseData;
+        }
+        _logger.LogError($"-----> Object not created. Error: {response.StatusCode.ToString()}");
+        return ResponseData<Pet>
+            .Error($"Object not created. Error :{response.StatusCode.ToString()}");
     }
 }

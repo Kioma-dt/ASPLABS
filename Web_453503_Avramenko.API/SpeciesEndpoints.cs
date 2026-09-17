@@ -8,7 +8,7 @@ public static class SpeciesEndpoints
 {
     public static void MapSpeciesEndpoints (this IEndpointRouteBuilder routes)
     {
-        var group = routes.MapGroup("/api/Species");
+        var group = routes.MapGroup("/api/species");
 
         group.MapGet("/",
                 async Task<Results<Ok<ResponseData<List<Species>>>, NotFound>> (AppDbContext db) =>
@@ -44,7 +44,7 @@ public static class SpeciesEndpoints
         {
             db.Species.Add(species);
             await db.SaveChangesAsync();
-            return TypedResults.Created($"/api/Species/{species.Id}",species);
+            return TypedResults.Created($"/api/species/{species.Id}",species);
         })
         .WithName("CreateSpecies");
 

@@ -9,15 +9,15 @@ public static class PetEndpoints
 {
     public static void MapPetEndpoints (this IEndpointRouteBuilder routes)
     {
-        var group = routes.MapGroup("/api/Pet");
+        var group = routes.MapGroup("/api/pets");
 
-        group.MapGet("/{species?}",
-                async Task<Results<Ok<ResponseData<ListModel<Pet>>>, NotFound>> (IMediator mediator, string? species, int page=1) =>
-                {
-                    var data = await mediator.Send(new GetListOfPets(species, page));
-                    return TypedResults.Ok(data);
-                })
-        .WithName("GetAllPets");
+        // group.MapGet("/{species?}",
+        //         async Task<Results<Ok<ResponseData<ListModel<Pet>>>, NotFound>> (IMediator mediator, string? species, int page=1) =>
+        //         {
+        //             var data = await mediator.Send(new GetListOfPets(species, page));
+        //             return TypedResults.Ok(data);
+        //         })
+        // .WithName("GetAllPets");
 
         group.MapGet("/{id:guid}", async Task<Results<Ok<Pet>, NotFound>> (Guid id, AppDbContext db) =>
         {
@@ -46,13 +46,13 @@ public static class PetEndpoints
         })
         .WithName("UpdatePet");
 
-        group.MapPost("/", async (Pet pet, AppDbContext db) =>
-        {
-            db.Pets.Add(pet);
-            await db.SaveChangesAsync();
-            return TypedResults.Created($"/api/Pet/{pet.Id}",pet);
-        })
-        .WithName("CreatePet");
+        // group.MapPost("/", async (Pet pet, AppDbContext db) =>
+        // {
+        //     db.Pets.Add(pet);
+        //     await db.SaveChangesAsync();
+        //     return TypedResults.Created($"/api/Pet/{pet.Id}",pet);
+        // })
+        // .WithName("CreatePet");
 
         group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (Guid id, AppDbContext db) =>
         {

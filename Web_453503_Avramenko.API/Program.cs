@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Web_453503_Avramenko.API.Data;
 using Web_453503_Avramenko.API;
@@ -11,8 +12,9 @@ var connStr = builder.Configuration.GetConnectionString("Postgres");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connStr));
 
 builder.Services.AddMediatR(conf =>
-    conf.RegisterServicesFromAssembly(typeof(Program)
-        .Assembly));
+    conf.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 builder.Services.AddControllers();
 
@@ -30,6 +32,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 //app.MapControllers();
+app.MapIEndpoints();
 
 app.MapPetEndpoints();
 

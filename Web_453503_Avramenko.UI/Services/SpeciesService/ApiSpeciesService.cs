@@ -25,7 +25,7 @@ public class ApiSpeciesService
     
     public async Task<ResponseData<List<Species>>> GetSpeciesListAsync()
     {
-        var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}/");
+        var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
         
         var response = await _httpClient.GetAsync(
             new Uri(urlString.ToString()));

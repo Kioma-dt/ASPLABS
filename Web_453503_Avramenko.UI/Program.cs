@@ -13,9 +13,9 @@ builder.Services.AddControllersWithViews();
 //! builder.RegisterCustomServices();
 
 builder.Services.AddHttpClient<IPetService, ApiPetService>(opt
-    => opt.BaseAddress = new Uri(uriData?.ApiUri+"pet"));
+    => opt.BaseAddress = new Uri(uriData?.ApiUri+"pets/"));
 builder.Services.AddHttpClient<ISpeciesService, ApiSpeciesService>(opt 
-    => opt.BaseAddress = new Uri(uriData?.ApiUri+"species"));
+    => opt.BaseAddress = new Uri(uriData?.ApiUri+"species/"));
 
 var app = builder.Build();
 
