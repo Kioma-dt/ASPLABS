@@ -62,17 +62,71 @@ public class ApiPetService
 
     public async Task<ResponseData<Pet>> GetPetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
+        urlString.Append($"{id}/");
+        
+        var response = await _httpClient.GetAsync(
+            new Uri(urlString.ToString()));
+        
+        if(response.IsSuccessStatusCode)
+        {
+            try
+            {
+                return await response
+                    .Content
+                    .ReadFromJsonAsync<ResponseData<Pet>>
+                        (_serializerOptions);
+            }
+            catch(JsonException ex)
+            {
+                _logger.LogError($"-----> Error: {ex.Message}");
+                return ResponseData<Pet>
+                    .Error($"Error: {ex.Message}");
+            }
+        }
+        _logger.LogError($"-----> Data not got from server. Error:{response.StatusCode.ToString()}");
+        return ResponseData<Pet>
+            .Error($"Data not got from server. Error: {response.StatusCode.ToString()}");
     }
 
     public async Task UpdatePetAsync(Guid id, Pet pet, IFormFile? formFile)
     {
-        throw new NotImplementedException();
+        pet.Image = "images/noimage.jpeg";
+        var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
+        urlString.Append($"{id}/");
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Put,
+            RequestUri = new Uri(urlString.ToString())
+        };
+        request.Content =
+            new StringContent(JsonSerializer.Serialize(pet));
+        var response = await _httpClient.SendAsync(
+            request,
+            CancellationToken.None);
+        if (!response.IsSuccessStatusCode)
+        {
+            _logger.LogError($"-----> Object not Updated. Error: {response.StatusCode.ToString()}");
+        }
     }
 
     public async Task DeletePetAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
+        urlString.Append($"{id}/");
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Delete,
+            RequestUri = new Uri(urlString.ToString())
+        };
+        
+        var response = await _httpClient.SendAsync(
+            request,
+            CancellationToken.None);
+        if (!response.IsSuccessStatusCode)
+        {
+            _logger.LogError($"-----> Object not Deleted. Error: {response.StatusCode.ToString()}");
+        }
     }
 
     public async Task<ResponseData<Pet>> CreatePetAsync(Pet pet, IFormFile? formFile)
