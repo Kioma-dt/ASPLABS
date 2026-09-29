@@ -10,6 +10,8 @@ var uriData = builder.Configuration.GetSection("UriData").Get<UriData>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddRazorPages();
+
 //! builder.RegisterCustomServices();
 
 builder.Services.AddHttpClient<IPetService, ApiPetService>(opt
@@ -39,5 +41,6 @@ app.MapControllerRoute(
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+app.MapRazorPages();
 
 app.Run();

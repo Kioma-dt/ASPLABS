@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Web_453503_Avramenko.API.Data;
 using Web_453503_Avramenko.API.UseCases;
 using Web_453503_Avramenko.Domain.Entities;
+
 namespace Web_453503_Avramenko.API;
 
 public static class PetEndpoints
@@ -22,6 +23,7 @@ public static class PetEndpoints
         group.MapGet("/{id:guid}", async Task<Results<Ok<Pet>, NotFound>> (Guid id, AppDbContext db) =>
         {
             return await db.Pets.AsNoTracking()
+                    .Include(p => p.Species)
                 .FirstOrDefaultAsync(model => model.Id == id)
                 is Pet model
                     ? TypedResults.Ok(model)

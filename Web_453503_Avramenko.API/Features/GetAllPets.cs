@@ -34,6 +34,7 @@ public static class GetAllPets
         
         var items = await db.Pets
             .AsQueryable()
+            .Include(p => p.Species)
             .Where(p => species == null
                         || (p.Species.NormalizedName.Equals(species)))
             .Skip((page - 1) * pageSize)
