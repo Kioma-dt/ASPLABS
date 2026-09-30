@@ -4,6 +4,7 @@ using Web_453503_Avramenko.UI;
 using Web_453503_Avramenko.UI.Extensions;
 using Web_453503_Avramenko.UI.HelperClasses;
 using Web_453503_Avramenko.UI.Services.Authentication;
+using Web_453503_Avramenko.UI.Services.FileService;
 using Web_453503_Avramenko.UI.Services.PetService;
 
 
@@ -54,6 +55,8 @@ builder.Services.AddAuthorization(opt =>
     opt.AddPolicy("admin", p => p.RequireRole("POWER-USER")));
 
 builder.Services.AddHttpClient<ITokenAccessor, KeycloakTokenAccessor>();
+
+builder.Services.AddScoped<IFileService, LocalFileService>();
 
 var app = builder.Build();
 
