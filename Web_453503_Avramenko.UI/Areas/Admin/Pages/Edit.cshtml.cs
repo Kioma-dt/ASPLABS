@@ -26,6 +26,9 @@ namespace Web_453503_Avramenko.UI.Areas.Admin.Pages
 
         [BindProperty]
         public Pet Pet { get; set; } = default!;
+        
+        [BindProperty]
+        public IFormFile? Image { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -60,7 +63,7 @@ namespace Web_453503_Avramenko.UI.Areas.Admin.Pages
 
             if (pet is not null)
             {
-                await _petService.UpdatePetAsync(Pet.Id, Pet, null);
+                await _petService.UpdatePetAsync(Pet.Id, Pet, Image);
             }
             else
             {

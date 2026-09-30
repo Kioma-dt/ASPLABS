@@ -36,8 +36,8 @@ public class SaveImageHandler(
         var scheme = httpContextAccessor.HttpContext.Request.Scheme;
         var host = httpContextAccessor.HttpContext.Request.Host;
         var baseUrl = new Uri($"{scheme}://{host}");
-        var imageFolderPathUrl = new Uri(baseUrl, "images");
-        var imageFullUrl = new Uri(imageFolderPathUrl, fileName);
+        var imageFullUrl = new Uri(baseUrl, $"images/{fileName}");
+        //var imageFullUrl = new Uri(imageFolderPathUrl, fileName);
         return imageFullUrl.ToString();
     }
 }

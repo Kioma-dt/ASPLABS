@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Pet.Id" />
             <div class="form-group">
@@ -30,9 +30,8 @@
                 <span asp-validation-for="Pet.Weight" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Pet.Image" class="control-label"></label>
-                <input asp-for="Pet.Image" class="form-control" />
-                <span asp-validation-for="Pet.Image" class="text-danger"></span>
+                <label asp-for="Image" class="control-label"></label>
+                <input type="file" asp-for="Image" accept="image/*" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="Pet.SpeciesId" class="control-label"></label>

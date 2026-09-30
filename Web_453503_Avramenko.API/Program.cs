@@ -9,6 +9,8 @@ builder.Services.AddOpenApi();
 
 var connStr = builder.Configuration.GetConnectionString("Postgres");
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connStr));
 
 builder.Services.AddMediatR(conf =>

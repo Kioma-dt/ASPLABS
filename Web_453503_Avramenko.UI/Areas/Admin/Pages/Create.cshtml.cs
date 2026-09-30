@@ -34,6 +34,9 @@ namespace Web_453503_Avramenko.UI.Areas.Admin.Pages
 
         [BindProperty]
         public Pet Pet { get; set; } = default!;
+        
+        [BindProperty]
+        public IFormFile? Image { get; set; }
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -43,7 +46,7 @@ namespace Web_453503_Avramenko.UI.Areas.Admin.Pages
                 return Page();
             }
 
-            await _petService.CreatePetAsync(Pet, null);
+            await _petService.CreatePetAsync(Pet, Image);
 
             return RedirectToPage("./Index");
         }
