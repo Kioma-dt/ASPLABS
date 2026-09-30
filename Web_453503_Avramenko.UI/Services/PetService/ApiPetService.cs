@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
+using Web_453503_Avramenko.UI.Services.Authentication;
 
 namespace Web_453503_Avramenko.UI.Services.PetService;
 
@@ -11,11 +12,13 @@ public class ApiPetService
     private readonly int _pageSize;
     private readonly JsonSerializerOptions _serializerOptions;
     readonly ILogger<ApiPetService> _logger;
+    readonly ITokenAccessor _tokenAccessor;
 
     public ApiPetService(
         HttpClient httpClient,
         IConfiguration configuration,
-        ILogger<ApiPetService> logger)
+        ILogger<ApiPetService> logger,
+        ITokenAccessor tokenAccessor)
     {
         _httpClient = httpClient;
         _pageSize = configuration.GetSection("ItemsPerPage").Get<int>();
@@ -24,6 +27,7 @@ public class ApiPetService
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         _logger = logger;
+        _tokenAccessor =  tokenAccessor;
     }
     
     public async Task<ResponseData<ListModel<Pet>>> GetPetListAsync(string? speciesNormalizedName, int pageNo = 1)
@@ -36,6 +40,16 @@ public class ApiPetService
         };
         
         urlString.Append($"?page={pageNo}");
+
+        try
+        {
+            await _tokenAccessor.SetAuthorizationHeaderAsync(_httpClient, false);
+        }
+        catch (Exception ex)
+        {
+            ResponseData<ListModel<Pet>>
+                .Error($"Data not got from server. Error: {ex.Message}");
+        }
 
         var response = await _httpClient.GetAsync(
             new Uri(urlString.ToString()));
@@ -66,6 +80,16 @@ public class ApiPetService
         var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
         urlString.Append($"{id}/");
         
+        try
+        {
+            await _tokenAccessor.SetAuthorizationHeaderAsync(_httpClient, false);
+        }
+        catch (Exception ex)
+        {
+            ResponseData<ListModel<Pet>>
+                .Error($"Data not got from server. Error: {ex.Message}");
+        }
+        
         var response = await _httpClient.GetAsync(
             new Uri(urlString.ToString()));
         
@@ -95,7 +119,6 @@ public class ApiPetService
         Pet pet, 
         IFormFile? formFile)
     {
-        pet.Image = "images/noimage.jpeg";
         var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
         urlString.Append($"{id}/");
         
@@ -114,8 +137,19 @@ public class ApiPetService
         }
 
         var data = new StringContent(JsonSerializer.Serialize(pet));
+        content.Add(data, "pet");
 
         request.Content = content;
+        
+        try
+        {
+            await _tokenAccessor.SetAuthorizationHeaderAsync(_httpClient, false);
+        }
+        catch (Exception ex)
+        {
+            ResponseData<ListModel<Pet>>
+                .Error($"Data not got from server. Error: {ex.Message}");
+        }
         
         var response = await _httpClient.SendAsync(
             request,
@@ -135,6 +169,16 @@ public class ApiPetService
             Method = HttpMethod.Delete,
             RequestUri = new Uri(urlString.ToString())
         };
+        
+        try
+        {
+            await _tokenAccessor.SetAuthorizationHeaderAsync(_httpClient, false);
+        }
+        catch (Exception ex)
+        {
+            ResponseData<ListModel<Pet>>
+                .Error($"Data not got from server. Error: {ex.Message}");
+        }
         
         var response = await _httpClient.SendAsync(
             request,
@@ -167,6 +211,16 @@ public class ApiPetService
         }
         
         request.Content = content;
+        
+        try
+        {
+            await _tokenAccessor.SetAuthorizationHeaderAsync(_httpClient, false);
+        }
+        catch (Exception ex)
+        {
+            ResponseData<ListModel<Pet>>
+                .Error($"Data not got from server. Error: {ex.Message}");
+        }
         
         var response = await _httpClient.SendAsync(
             request,
