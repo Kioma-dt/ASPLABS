@@ -13,7 +13,8 @@ public static class PetEndpoints
     public static void MapPetEndpoints (this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/api/pets")
-            .DisableAntiforgery();;
+            .DisableAntiforgery()
+            .RequireAuthorization("admin");
 
         // group.MapGet("/{species?}",
         //         async Task<Results<Ok<ResponseData<ListModel<Pet>>>, NotFound>> (IMediator mediator, string? species, int page=1) =>
@@ -24,16 +25,16 @@ public static class PetEndpoints
         // .WithName("GetAllPets");
 
         group.MapGet("/{id:guid}", async Task<Results<Ok<Pet>, NotFound>> (Guid id, AppDbContext db) =>
-        {
-            var pet = await db.Pets.Include(m => m.Species).FirstOrDefaultAsync(m => m.Id == id);
-            return await db.Pets
-                    .Include(p => p.Species)
-                .FirstOrDefaultAsync(model => model.Id == id)
-                is Pet model
+            {
+                var pet = await db.Pets.Include(m => m.Species).FirstOrDefaultAsync(m => m.Id == id);
+                return await db.Pets
+                        .Include(p => p.Species)
+                        .FirstOrDefaultAsync(model => model.Id == id)
+                    is Pet model
                     ? TypedResults.Ok(model)
                     : TypedResults.NotFound();
-        })
-        .WithName("GetPetById");
+            })
+            .WithName("GetPetById");
 
         
         group.MapPut("/{id}", async Task<Results<Ok, NotFound, BadRequest>> (

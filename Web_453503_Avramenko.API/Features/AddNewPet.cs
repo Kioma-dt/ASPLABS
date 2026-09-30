@@ -42,7 +42,8 @@ public static class AddNewPet
             app.MapPost("api/pets", Handler)
                 .DisableAntiforgery()
                 .WithName("CreatePet")
-                .WithTags("Pets");
+                .WithTags("Pets")
+                .RequireAuthorization("admin");
         }
     }
 
