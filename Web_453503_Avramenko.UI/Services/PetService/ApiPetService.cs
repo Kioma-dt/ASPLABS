@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 
@@ -89,17 +90,33 @@ public class ApiPetService
             .Error($"Data not got from server. Error: {response.StatusCode.ToString()}");
     }
 
-    public async Task UpdatePetAsync(Guid id, Pet pet, IFormFile? formFile)
+    public async Task UpdatePetAsync(
+        Guid id, 
+        Pet pet, 
+        IFormFile? formFile)
     {
+        pet.Image = "images/noimage.jpeg";
         var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
         urlString.Append($"{id}/");
+        
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Put,
             RequestUri = new Uri(urlString.ToString())
         };
-        request.Content =
-            new StringContent(JsonSerializer.Serialize(pet), Encoding.UTF8, "application/json");
+
+        var content = new MultipartFormDataContent();
+
+        if (formFile is not null)
+        {
+            var streamContent = new StreamContent(formFile.OpenReadStream());
+            content.Add(streamContent, "file", formFile.FileName);
+        }
+
+        var data = new StringContent(JsonSerializer.Serialize(pet));
+
+        request.Content = content;
+        
         var response = await _httpClient.SendAsync(
             request,
             CancellationToken.None);
@@ -135,8 +152,22 @@ public class ApiPetService
             Method = HttpMethod.Post,
             RequestUri = _httpClient.BaseAddress
         };
-        request.Content =
-            new StringContent(JsonSerializer.Serialize(pet), Encoding.UTF8, "application/json");
+        
+        var content = new MultipartFormDataContent();
+        
+        content.Add(new StringContent(pet.Name), "name");
+        content.Add(new StringContent(pet.Description), "description");
+        content.Add(new StringContent(pet.Weight.ToString(CultureInfo.InvariantCulture)), "weight");
+        content.Add(new StringContent(pet.SpeciesId.ToString()), "speciesId");
+        
+        if (formFile is not null)
+        {
+            var streamContent = new StreamContent(formFile.OpenReadStream());
+            content.Add(streamContent, "file", formFile.FileName);
+        }
+        
+        request.Content = content;
+        
         var response = await _httpClient.SendAsync(
             request,
             CancellationToken.None);
@@ -151,4 +182,11 @@ public class ApiPetService
         return ResponseData<Pet>
             .Error($"Object not created. Error :{response.StatusCode.ToString()}");
     }
+
+    // record CreatePetRequestDto(
+    //     string Name,
+    //     string Description,
+    //     double Weight,
+    //     Guid SpeciesId,
+    //     IFormFile? File);
 }
