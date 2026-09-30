@@ -52,6 +52,13 @@ public static class PetEndpoints
 
                 if (file is not null)
                 {
+                    var oldPet = await db.Pets.FirstOrDefaultAsync(m => m.Id == id);
+
+                    if (oldPet is not null && oldPet.Image is not null)
+                    {
+                       await mediator.Send(new DeleteImage(oldPet.Image));
+                    }
+                    
                     newPet.Image = await mediator.Send(new SaveImage(file));
                 }
             
@@ -78,8 +85,18 @@ public static class PetEndpoints
         // })
         // .WithName("CreatePet");
 
-        group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (Guid id, AppDbContext db) =>
+        group.MapDelete("/{id}", async Task<Results<Ok, NotFound>> (
+                Guid id, 
+                AppDbContext db,
+                IMediator mediator) =>
         {
+            var oldPet = await db.Pets.FirstOrDefaultAsync(m => m.Id == id);
+
+            if (oldPet is not null && oldPet.Image is not null)
+            {
+                await mediator.Send(new DeleteImage(oldPet.Image));
+            }
+            
             var affected = await db.Pets
                 .Where(model => model.Id == id)
                 .ExecuteDeleteAsync();
