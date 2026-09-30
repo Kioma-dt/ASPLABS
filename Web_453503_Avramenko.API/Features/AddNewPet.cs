@@ -12,7 +12,7 @@ public static class AddNewPet
         string Description,
         double Weight,
         Guid SpeciesId);
-
+    
     public class RequestValidator
         : AbstractValidator<RequestDto>
     {
@@ -21,11 +21,11 @@ public static class AddNewPet
             RuleFor(r => r.Name)
                 .NotEmpty()
                 .MaximumLength(64);
-
+    
             RuleFor(r => r.Description)
                 .NotEmpty()
                 .MaximumLength(256);
-
+    
             RuleFor(r => r.Weight)
                 .GreaterThan(0);
         }
