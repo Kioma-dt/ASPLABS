@@ -19,11 +19,13 @@ namespace Web_453503_Avramenko.UI.Areas.Admin.Pages
             _petService = petService;
         }
 
-        public IList<Pet> Pet { get;set; } = default!;
+        public ListModel<Pet> Pet { get; set; } = new();
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int pageNumber = 1)
         {
-            Pet = (await _petService.GetPetListAsync(null)).Data.Items;
+            pageNumber = Math.Max(pageNumber, 1);
+            Pet = (await _petService.GetPetListAsync(null, pageNumber)).Data
+                  ?? new ListModel<Pet>();
         }
     }
 }

@@ -72,10 +72,10 @@ public class ApiPetService
         {
             try
             {
-                return await response
+                return ResponseData<Pet>.Success(await response
                     .Content
-                    .ReadFromJsonAsync<ResponseData<Pet>>
-                        (_serializerOptions);
+                    .ReadFromJsonAsync<Pet>
+                        (_serializerOptions));
             }
             catch(JsonException ex)
             {
@@ -91,7 +91,6 @@ public class ApiPetService
 
     public async Task UpdatePetAsync(Guid id, Pet pet, IFormFile? formFile)
     {
-        pet.Image = "images/noimage.jpeg";
         var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
         urlString.Append($"{id}/");
         var request = new HttpRequestMessage
@@ -100,7 +99,7 @@ public class ApiPetService
             RequestUri = new Uri(urlString.ToString())
         };
         request.Content =
-            new StringContent(JsonSerializer.Serialize(pet));
+            new StringContent(JsonSerializer.Serialize(pet), Encoding.UTF8, "application/json");
         var response = await _httpClient.SendAsync(
             request,
             CancellationToken.None);
@@ -131,14 +130,13 @@ public class ApiPetService
 
     public async Task<ResponseData<Pet>> CreatePetAsync(Pet pet, IFormFile? formFile)
     {
-        pet.Image = "images/noimage.jpeg";
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Post,
             RequestUri = _httpClient.BaseAddress
         };
         request.Content =
-            new StringContent(JsonSerializer.Serialize(pet));
+            new StringContent(JsonSerializer.Serialize(pet), Encoding.UTF8, "application/json");
         var response = await _httpClient.SendAsync(
             request,
             CancellationToken.None);

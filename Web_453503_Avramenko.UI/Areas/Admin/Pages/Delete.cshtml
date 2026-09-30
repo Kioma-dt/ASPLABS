@@ -34,13 +34,10 @@
             @Html.DisplayNameFor(model => model.Pet.Image)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pet.Image)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pet.ImageType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pet.ImageType)
+            <img src="@Model.Pet.Image"
+                 class="card-img-top"
+                 alt="Image of @Model.Pet.Name"
+                 style="height: 250px; object-fit: cover;">
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Pet.Species)

@@ -10,7 +10,8 @@ public static class PetEndpoints
 {
     public static void MapPetEndpoints (this IEndpointRouteBuilder routes)
     {
-        var group = routes.MapGroup("/api/pets");
+        var group = routes.MapGroup("/api/pets")
+            .DisableAntiforgery();;
 
         // group.MapGet("/{species?}",
         //         async Task<Results<Ok<ResponseData<ListModel<Pet>>>, NotFound>> (IMediator mediator, string? species, int page=1) =>
@@ -22,7 +23,8 @@ public static class PetEndpoints
 
         group.MapGet("/{id:guid}", async Task<Results<Ok<Pet>, NotFound>> (Guid id, AppDbContext db) =>
         {
-            return await db.Pets.AsNoTracking()
+            var pet = await db.Pets.Include(m => m.Species).FirstOrDefaultAsync(m => m.Id == id);
+            return await db.Pets
                     .Include(p => p.Species)
                 .FirstOrDefaultAsync(model => model.Id == id)
                 is Pet model
@@ -31,6 +33,7 @@ public static class PetEndpoints
         })
         .WithName("GetPetById");
 
+        
         group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (Guid id, Pet pet, AppDbContext db) =>
         {
             var affected = await db.Pets
