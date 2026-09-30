@@ -1,7 +1,9 @@
+using System.Text.Json;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Web_453503_Avramenko.API.Abstractions;
 using Web_453503_Avramenko.API.Data;
+using Web_453503_Avramenko.API.UseCases;
 
 namespace Web_453503_Avramenko.API.Features;
 
@@ -11,7 +13,8 @@ public static class AddNewPet
         string Name,
         string Description,
         double Weight,
-        Guid SpeciesId);
+        Guid SpeciesId,
+        IFormFile? File);
     
     public class RequestValidator
         : AbstractValidator<RequestDto>
@@ -44,8 +47,9 @@ public static class AddNewPet
     }
 
     public static async Task<IResult> Handler(
-        [FromBody] RequestDto request,
+        [FromForm] RequestDto request,
         AppDbContext db,
+        IMediator mediator,
         IValidator<RequestDto> validator)
     {
         var validationResult = await validator.ValidateAsync(request);
@@ -64,16 +68,22 @@ public static class AddNewPet
             return TypedResults
                 .BadRequest($"Species with id: {request.SpeciesId} not exist");
         }
-
-        var pet = new Pet()
+        
+        var newPet = new Pet()
         {
             Name = request.Name,
             Description = request.Description,
             Weight = request.Weight,
             SpeciesId = request.SpeciesId
         };
-        await db.Pets.AddAsync(pet);
+        
+        if (request.File is not null)
+        {
+            newPet.Image = await mediator.Send(new SaveImage(request.File));
+        }
+        
+        await db.Pets.AddAsync(newPet);
         await db.SaveChangesAsync();
-        return TypedResults.Created($"/api/pets/{pet.Id}", pet);
+        return TypedResults.Created($"/api/pets/{newPet.Id}", newPet);
     }
 }

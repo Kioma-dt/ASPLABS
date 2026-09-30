@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using Web_453503_Avramenko.API.Data;
 using Web_453503_Avramenko.API.UseCases;
 using Web_453503_Avramenko.Domain.Entities;
@@ -34,20 +36,37 @@ public static class PetEndpoints
         .WithName("GetPetById");
 
         
-        group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (Guid id, Pet pet, AppDbContext db) =>
-        {
-            var affected = await db.Pets
-                .Where(model => model.Id == id)
-                .ExecuteUpdateAsync(setters => setters
-                    .SetProperty(m => m.Id, pet.Id)
-                    .SetProperty(m => m.Name, pet.Name)
-                    .SetProperty(m => m.Description, pet.Description)
-                    .SetProperty(m => m.Weight, pet.Weight)
-                    .SetProperty(m => m.Image, pet.Image)
-                    .SetProperty(m => m.ImageType, pet.ImageType)
-                    .SetProperty(m => m.SpeciesId, pet.SpeciesId)
-                    );
-            return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
+        group.MapPut("/{id}", async Task<Results<Ok, NotFound, BadRequest>> (
+                [FromRoute]Guid id, 
+                [FromForm] string pet,
+                [FromForm] IFormFile? file,
+                AppDbContext db,
+                IMediator mediator) =>
+            {
+                var newPet = JsonSerializer.Deserialize<Pet>(pet);
+
+                if (newPet is null)
+                {
+                    return TypedResults.BadRequest();
+                }
+
+                if (file is not null)
+                {
+                    newPet.Image = await mediator.Send(new SaveImage(file));
+                }
+            
+                var affected = await db.Pets
+                    .Where(model => model.Id == id)
+                    .ExecuteUpdateAsync(setters => setters
+                        .SetProperty(m => m.Id, newPet.Id)
+                        .SetProperty(m => m.Name, newPet.Name)
+                        .SetProperty(m => m.Description, newPet.Description)
+                        .SetProperty(m => m.Weight, newPet.Weight)
+                        .SetProperty(m => m.Image, newPet.Image)
+                        .SetProperty(m => m.ImageType, newPet.ImageType)
+                        .SetProperty(m => m.SpeciesId, newPet.SpeciesId)
+                        );
+                return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
         .WithName("UpdatePet");
 
