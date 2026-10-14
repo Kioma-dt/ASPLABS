@@ -13,8 +13,7 @@ public static class PetEndpoints
     public static void MapPetEndpoints (this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/api/pets")
-            .DisableAntiforgery()
-            .RequireAuthorization("admin");
+            .DisableAntiforgery();
 
         // group.MapGet("/{species?}",
         //         async Task<Results<Ok<ResponseData<ListModel<Pet>>>, NotFound>> (IMediator mediator, string? species, int page=1) =>
@@ -76,7 +75,8 @@ public static class PetEndpoints
                         );
                 return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
-        .WithName("UpdatePet");
+        .WithName("UpdatePet")
+        .RequireAuthorization("admin");;
 
         // group.MapPost("/", async (Pet pet, AppDbContext db) =>
         // {
@@ -103,6 +103,7 @@ public static class PetEndpoints
                 .ExecuteDeleteAsync();
             return affected == 1 ? TypedResults.Ok() : TypedResults.NotFound();
         })
-        .WithName("DeletePet");
+        .WithName("DeletePet")
+        .RequireAuthorization("admin");;
     }
 }

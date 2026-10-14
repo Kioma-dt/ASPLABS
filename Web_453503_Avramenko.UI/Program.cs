@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Web_453503_Avramenko.Domain.Cart;
 using Web_453503_Avramenko.UI;
 using Web_453503_Avramenko.UI.Extensions;
 using Web_453503_Avramenko.UI.HelperClasses;
 using Web_453503_Avramenko.UI.Services.Authentication;
 using Web_453503_Avramenko.UI.Services.FileService;
 using Web_453503_Avramenko.UI.Services.PetService;
+using Web_453503_Avramenko.UI.SessionCart;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,6 +60,12 @@ builder.Services.AddHttpClient<ITokenAccessor, KeycloakTokenAccessor>();
 
 builder.Services.AddScoped<IFileService, LocalFileService>();
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
+builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -70,6 +78,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseSession();
+
 
 app.UseAuthorization();
 

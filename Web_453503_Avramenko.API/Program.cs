@@ -23,7 +23,6 @@ builder.Services.AddStackExchangeRedisCache(opt =>
         .Configuration
         .GetConnectionString("Redis");
 });
-
 builder.Services.AddMediatR(conf =>
     conf.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
