@@ -1,0 +1,42 @@
+@model ListModel<Pet>
+
+@{
+    var species = (ViewData["speciesList"] as List<Species>)
+        ?? new List<Species>();
+}
+
+<h1>Pets</h1>
+
+<div class="col-2 border-2">
+    <ul class="nav ">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"
+               data-bs-toggle="dropdown"
+               href="#"
+               role="button"
+               aria-expanded="false">@ViewData["currentSpeciesName"]
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item"
+                       asp-controller="pet"
+                       asp-route-species=@null>All</a>
+                </li>
+                @foreach (var item in species)
+                {
+                    <li>
+                        <a class="dropdown-item"
+                           asp-controller="pet"
+                           asp-route-species="@item.NormalizedName">
+                            @item.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div id="pet-list" class="ajax-pagination">
+    <partial name="_PetListPartial" model="Model" />
+</div>

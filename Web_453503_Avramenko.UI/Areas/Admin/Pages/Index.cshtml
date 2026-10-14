@@ -1,0 +1,15 @@
+@page
+@model Web_453503_Avramenko.UI.Areas.Admin.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<div id="admin-pet-list" class="ajax-pagination">
+    <partial name="_PetListPartial" model="Model.Pet" />
+</div>

@@ -1,0 +1,5 @@
+@model CartInfoViewModel
+
+<a class="navbar-text ms-auto" asp-controller="cart" asp-action="index">
+    @Model.TotalWeight kg <i class="bi bi-cart"></i> (@Model.Count)
+</a>
