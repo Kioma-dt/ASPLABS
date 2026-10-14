@@ -35,6 +35,11 @@ public class PetController
             return NotFound(petResponse.ErrorMessage);
         }
 
+        if (Request.IsAjaxRequest())
+        {
+            return PartialView("_PetListPartial", petResponse.Data);
+        }
+
         return View(petResponse?.Data);
     }
 }

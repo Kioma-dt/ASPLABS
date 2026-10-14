@@ -21,11 +21,18 @@ namespace Web_453503_Avramenko.UI.Areas.Admin.Pages
 
         public ListModel<Pet> Pet { get; set; } = new();
 
-        public async Task OnGetAsync(int pageNumber = 1)
+        public async Task<IActionResult> OnGetAsync(int pageNumber = 1)
         {
             pageNumber = Math.Max(pageNumber, 1);
             Pet = (await _petService.GetPetListAsync(null, pageNumber)).Data
                   ?? new ListModel<Pet>();
+
+            if (Request.IsAjaxRequest())
+            {
+                return Partial("_PetListPartial", Pet);
+            }
+
+            return Page();
         }
     }
 }
