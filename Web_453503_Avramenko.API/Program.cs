@@ -15,6 +15,15 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connStr));
 
+builder.Services.AddHybridCache();
+builder.Services.AddStackExchangeRedisCache(opt =>
+{
+    opt.InstanceName = "labs_";
+    opt.Configuration = builder
+        .Configuration
+        .GetConnectionString("Redis");
+});
+
 builder.Services.AddMediatR(conf =>
     conf.RegisterServicesFromAssembly(typeof(Program).Assembly));
 

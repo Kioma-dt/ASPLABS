@@ -55,10 +55,9 @@ public class PagerTagHelper
         
         if (!Admin)
         {
-            urlPrev = _linkGenerator.GetPathByAction(
+            urlPrev = _linkGenerator.GetPathByRouteValues(
                 httpContext,
-                action: "Index",
-                controller: "Pet",
+                routeName: "catalog",
                 values: new
                 {
                     species = Category,
@@ -97,10 +96,9 @@ public class PagerTagHelper
 
             if (!Admin)
             {
-                urlCurrent = _linkGenerator.GetPathByAction(
+                urlCurrent = _linkGenerator.GetPathByRouteValues(
                     httpContext,
-                    action: "Index",
-                    controller: "Pet",
+                    routeName: "catalog",
                     values: new
                     {
                         species = Category,
@@ -133,10 +131,9 @@ public class PagerTagHelper
         
         if (!Admin)
         {
-            urlNext = _linkGenerator.GetPathByAction(
+            urlNext = _linkGenerator.GetPathByRouteValues(
                 httpContext,
-                action: "Index",
-                controller: "Pet",
+                routeName: "catalog",
                 values: new
                 {
                     species = Category,

@@ -4,6 +4,7 @@ using Web_453503_Avramenko.UI.Services.SpeciesService;
 
 namespace Web_453503_Avramenko.UI.Controllers;
 
+[Route("catalog")]
 public class PetController
     : Controller
 {
@@ -18,6 +19,7 @@ public class PetController
         _petService = petService;
     }
 
+    [Route("{species?}")]
     public async Task<IActionResult> Index(string? species, int page = 1)
     {
         var speciesList = (await _speciesService.GetSpeciesListAsync()).Data
