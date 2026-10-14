@@ -77,39 +77,6 @@
     }
 </div>
 
-<nav class="mt-4">
-    <ul class="pagination justify-content-center">
-        <li class="page-item">
-            <a class="page-link"
-               asp-controller="Pet"
-               asp-action="Index"
-               asp-route-species="@category"
-               asp-route-page="@prev">
-                Prev
-            </a>
-        </li>
-
-        @for (var pageNumber = 1; pageNumber <= Model.TotalPages; pageNumber++)
-        {
-            <li class="page-item @(pageNumber == Model.CurrentPage ? "active" : string.Empty)">
-                <a class="page-link"
-                   asp-controller="Pet"
-                   asp-action="Index"
-                   asp-route-species="@category"
-                   asp-route-page="@pageNumber">
-                    @pageNumber
-                </a>
-            </li>
-        }
-
-        <li class="page-item">
-            <a class="page-link"
-               asp-controller="Pet"
-               asp-action="Index"
-               asp-route-species="@category"
-               asp-route-page="@next">
-                Next
-            </a>
-        </li>
-    </ul>
-</nav>
+<pager current-page="@Model.CurrentPage"
+       total-pages="@Model.TotalPages"
+       category="@category"></pager>
