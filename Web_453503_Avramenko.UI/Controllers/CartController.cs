@@ -21,7 +21,7 @@ public class CartController
 
     public IActionResult Index()
     {
-        return View();
+        return View(_cart);
     }
     
     [Authorize]
@@ -39,9 +39,9 @@ public class CartController
 
     [Authorize]
     [Route("[controller]/remove/{id:guid}")]
-    public Task Remove(Guid id)
+    public IActionResult Remove(Guid id)
     {
         _cart.RemoveFromCart(id);
-        return Task.CompletedTask;
+        return RedirectToAction(nameof(Index));
     }
 }

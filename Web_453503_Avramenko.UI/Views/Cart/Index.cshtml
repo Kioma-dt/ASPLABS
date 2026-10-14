@@ -1,0 +1,75 @@
+@model Web_453503_Avramenko.Domain.Cart.Cart
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Cart</h1>
+
+@if (!Model.CartItems.Any())
+{
+    <div class="alert alert-info mt-3" role="alert">
+        Your cart is empty.
+    </div>
+}
+else
+{
+    <div class="card mt-3">
+        <div class="card-header">
+            Cart items
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col">Pet</th>
+                        <th scope="col">Description</th>
+                        <th scope="col" class="text-end">Weight</th>
+                        <th scope="col" class="text-end">Quantity</th>
+                        <th scope="col" class="text-end">Total</th>
+                        <th scope="col" class="text-end">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.CartItems.Values.Where(i => i.Pet is not null))
+                    {
+                        var pet = item.Pet!;
+                        var totalWeight = pet.Weight * item.Quantity;
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="@pet.Image"
+                                         alt="Image of @pet.Name"
+                                         style="width: 72px; height: 72px; object-fit: cover;"
+                                         class="rounded border">
+                                    <span class="fw-semibold">@pet.Name</span>
+                                </div>
+                            </td>
+                            <td>@pet.Description</td>
+                            <td class="text-end">@pet.Weight.ToString("0.##") kg</td>
+                            <td class="text-end">@item.Quantity</td>
+                            <td class="text-end fw-semibold">@totalWeight.ToString("0.##") kg</td>
+                            <td class="text-end">
+                                <a class="btn btn-sm btn-outline-danger"
+                                   asp-controller="Cart"
+                                   asp-action="Remove"
+                                   asp-route-id="@pet.Id">
+                                    Remove
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="4" class="text-end">Total weight:</th>
+                        <th class="text-end">@Model.TotalWeight.ToString("0.##") kg</th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+}

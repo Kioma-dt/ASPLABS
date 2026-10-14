@@ -19,7 +19,7 @@ public class CartViewComponent
         var viewModel = new CartInfoViewModel()
         {
             Count = _cart.Count,
-            TotalWeight = _cart.TotalWeight
+            TotalWeight = Math.Round(_cart.TotalWeight, 3)
         };
         return View(viewModel);
     }
