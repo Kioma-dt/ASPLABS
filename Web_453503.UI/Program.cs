@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Serilog;
 using Web_453503.Domain.Cart;
 using Web_453503.UI;
 using Web_453503.UI.HelperClasses;
+using Web_453503.UI.Middlewares;
 using Web_453503.UI.Services.Authentication;
 using Web_453503.UI.Services.FileService;
 using Web_453503.UI.Services.PetService;
@@ -10,6 +12,13 @@ using Web_453503.UI.SessionCart;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSerilog((services, configuration) =>
+{
+    configuration
+        .ReadFrom.Configuration(builder.Configuration)
+        .ReadFrom.Services(services);
+});
 
 var uriData = builder.Configuration.GetSection("UriData").Get<UriData>();
 
@@ -66,6 +75,8 @@ builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 
 
 var app = builder.Build();
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

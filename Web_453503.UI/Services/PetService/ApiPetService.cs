@@ -65,12 +65,17 @@ public class ApiPetService
             }
             catch(JsonException ex)
             {
-                _logger.LogError($"-----> Error: {ex.Message}");
+                _logger.LogError(ex, 
+                    "Failed to describe pet list. Species: {Species}, Page: {Page}",
+                    speciesNormalizedName,
+                    pageNo);
                 return ResponseData<ListModel<Pet>>
                     .Error($"Error: {ex.Message}");
             }
         }
-        _logger.LogError($"-----> Data not got from server. Error:{response.StatusCode.ToString()}");
+        _logger.LogError(
+            "Data not got from server. Error:{ServerError}",
+            response.StatusCode.ToString());
         return ResponseData<ListModel<Pet>>
             .Error($"Data not got from server. Error: {response.StatusCode.ToString()}");
     }
@@ -104,12 +109,16 @@ public class ApiPetService
             }
             catch(JsonException ex)
             {
-                _logger.LogError($"-----> Error: {ex.Message}");
+                _logger.LogError(ex, 
+                    "Failed to describe pet. PetId: {PetId}",
+                    id);
                 return ResponseData<Pet>
                     .Error($"Error: {ex.Message}");
             }
         }
-        _logger.LogError($"-----> Data not got from server. Error:{response.StatusCode.ToString()}");
+        _logger.LogError(
+            "Data not got from server. Error: {ServerError}",
+            response.StatusCode.ToString());
         return ResponseData<Pet>
             .Error($"Data not got from server. Error: {response.StatusCode.ToString()}");
     }
@@ -156,7 +165,9 @@ public class ApiPetService
             CancellationToken.None);
         if (!response.IsSuccessStatusCode)
         {
-            _logger.LogError($"-----> Object not Updated. Error: {response.StatusCode.ToString()}");
+            _logger.LogError(
+                "Object not updated. Error:{ServerError}",
+                response.StatusCode.ToString());
         }
     }
 
@@ -185,7 +196,9 @@ public class ApiPetService
             CancellationToken.None);
         if (!response.IsSuccessStatusCode)
         {
-            _logger.LogError($"-----> Object not Deleted. Error: {response.StatusCode.ToString()}");
+            _logger.LogError(
+                "Object Not Deleted. Error:{ServerError}",
+                response.StatusCode.ToString());
         }
     }
 
@@ -232,7 +245,9 @@ public class ApiPetService
                 .ReadFromJsonAsync<ResponseData<Pet>> (_serializerOptions);
             return responseData;
         }
-        _logger.LogError($"-----> Object not created. Error: {response.StatusCode.ToString()}");
+        _logger.LogError(
+            "Object not created. Error:{ServerError}",
+            response.StatusCode.ToString());
         return ResponseData<Pet>
             .Error($"Object not created. Error :{response.StatusCode.ToString()}");
     }

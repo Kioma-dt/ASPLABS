@@ -41,12 +41,16 @@ public class ApiSpeciesService
             }
             catch(JsonException ex)
             {
-                _logger.LogError($"-----> Error: {ex.Message}");
+                _logger.LogError(ex, 
+                    "Failed to describe list");
                 return ResponseData<List<Species>>
                     .Error($"Ошибка: {ex.Message}");
             }
         }
-        _logger.LogError($"-----> Data not got from service. Error:{response.StatusCode.ToString()}");
+        
+        _logger.LogError(
+            "Data not got from server. Error: {ServerError}",
+            response.StatusCode.ToString());
         return ResponseData<List<Species>>
             .Error($"Data not got from service. Error: {response.StatusCode.ToString()}");
     }
