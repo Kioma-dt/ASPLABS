@@ -1,0 +1,36 @@
+@inject IDataService DataService
+@implements IDisposable
+
+@if (!DataService.Success)
+{
+    <div class="alert alert-danger">
+        @DataService.ErrorMessage
+    </div>
+}
+else if (DataService.Pets.Count == 0)
+{
+    <p>Pets list is empty</p>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var pet in DataService.Pets)
+        {
+            <li class="list-group-item" @key="pet.Id">
+                @pet.Name
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        DataService.DataLoaded += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        DataService.DataLoaded -= StateHasChanged;
+    }
+}

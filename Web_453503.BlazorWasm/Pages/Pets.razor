@@ -1,0 +1,34 @@
+@page "/pets"
+@attribute [Authorize]
+
+@inject IDataService DataService
+
+<PageTitle>Pets</PageTitle>
+
+<h1>Pets list</h1>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <SpeciesSelector />
+    <PetList />
+}
+
+@code {
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await DataService.GetSpeciesListAsync();
+
+        if (DataService.Success)
+        {
+            await DataService.GetPetsListAsync();   
+        }
+
+        isLoading = false;
+    }
+}

@@ -1,0 +1,55 @@
+@inject IDataService DataService
+@using Web_453503.Domain.Entities
+@implements IDisposable
+
+<div class="dropdown mb-3">
+
+    <button class="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+
+        @(DataService.SelectedSpecies?.Name ?? "All")
+
+    </button>
+
+    <ul class="dropdown-menu">
+
+        <li>
+            <button class="dropdown-item @(DataService.SelectedSpecies is null ? "active" : "")"
+            @onclick="() => SelectSpeciesAsync(null)">
+                All
+            </button>
+        </li>
+
+        @foreach (var species in DataService.Species)
+        {
+            <li>
+                <button class="dropdown-item @(DataService.SelectedSpecies?.Id == species.Id ? "active" : "")"
+                        @onclick="() => SelectSpeciesAsync(species)">
+                    @species.Name
+                </button>
+            </li>
+        }
+
+    </ul>
+
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        DataService.DataLoaded += StateHasChanged;
+    }
+
+    private async Task SelectSpeciesAsync(Species? species)
+    {
+        DataService.SelectedSpecies = species;
+
+        await DataService.GetPetsListAsync();
+    }
+    public void Dispose()
+    {
+        DataService.DataLoaded -= StateHasChanged;
+    }
+}
