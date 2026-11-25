@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_453503.Tests", "Web_453503.Tests\Web_453503.Tests.csproj", "{0B9E1A8B-D61B-47FA-9998-D74B053F650C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_453503.Blazor.SSR", "Web_453503.Blazor.SSR\Web_453503.Blazor.SSR.csproj", "{48A41A7F-F0B1-4E77-8887-E7EF33975795}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{0B9E1A8B-D61B-47FA-9998-D74B053F650C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B9E1A8B-D61B-47FA-9998-D74B053F650C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B9E1A8B-D61B-47FA-9998-D74B053F650C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48A41A7F-F0B1-4E77-8887-E7EF33975795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48A41A7F-F0B1-4E77-8887-E7EF33975795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48A41A7F-F0B1-4E77-8887-E7EF33975795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48A41A7F-F0B1-4E77-8887-E7EF33975795}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
