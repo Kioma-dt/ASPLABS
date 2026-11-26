@@ -1,0 +1,45 @@
+@using Web_453503.Domain.Entities
+
+@if (SelectedPet is not null)
+{
+    <div class="card mt-3">
+        <div class="card-header">
+            Detailed info
+        </div>
+
+        <div class="card-body">
+
+            @if (!string.IsNullOrEmpty(SelectedPet.Image))
+            {
+                <img src="@SelectedPet.Image"
+                     class="img-fluid rounded mb-3"
+                     style="max-height: 250px;"
+                     alt="@SelectedPet.Name" />
+            }
+
+            <h4 class="card-title">
+                @SelectedPet.Name
+            </h4>
+
+            <p class="card-text">
+                @SelectedPet.Description
+            </p>
+
+            <p>
+                <strong>Weight:</strong>
+                @SelectedPet.Weight kg
+            </p>
+
+            <p>
+                <strong>Species:</strong>
+                @(SelectedPet.Species?.Name ?? "Unknown")
+            </p>
+
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Pet? SelectedPet { get; set; }
+}

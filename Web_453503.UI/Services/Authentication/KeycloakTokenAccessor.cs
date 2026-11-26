@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Text.Json.Nodes;
 using Azure.Identity;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using Web_453503.UI.HelperClasses;
 
@@ -28,14 +29,22 @@ public class KeycloakTokenAccessor(
     async Task<string> GetUserToken()
     {
         var context = httpContextAccessor.HttpContext;
-        var authSession = await context.AuthenticateAsync("keycloak");
+        var authSession = await context.AuthenticateAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme);
 
-        if (authSession?.Principal is null)
-        {
+        if (!authSession.Succeeded || authSession.Properties is null)
             throw new AuthenticationFailedException("User is unauthorized");
-        }
-        
-        return await context.GetTokenAsync("keycloak", "access_token");
+
+        return authSession.Properties.GetTokenValue("access_token")
+               ?? throw new AuthenticationFailedException("Access token not found");
+        // var authSession = await context.AuthenticateAsync("keycloak");
+        //
+        // if (authSession?.Principal is null)
+        // {
+        //     throw new AuthenticationFailedException("User is unauthorized");
+        // }
+        //
+        // return await context.GetTokenAsync("keycloak", "access_token");
     }
 
     async Task<string> GetClientToken()

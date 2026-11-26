@@ -13,17 +13,39 @@ else if (DataService.Pets.Count == 0)
 }
 else
 {
-    <ul class="list-group">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
         @foreach (var pet in DataService.Pets)
         {
-            <li class="list-group-item" @key="pet.Id">
-                @pet.Name
-            </li>
+            <tr @key="pet.Id">
+                <td>@pet.Name</td>
+                <td>@pet.Description</td>
+                <td>
+                    <button class="btn btn-outline-primary btn-sm"
+                            title="Details"
+                            aria-label="Details"
+                            @onclick="() => PetSelected.InvokeAsync(pet.Id)">
+                        <i class="bi bi-info-circle"></i>
+                    </button>
+                </td>
+            </tr>
         }
-    </ul>
+        </tbody>
+    </table>
 }
 
 @code {
+    [Parameter]
+    public EventCallback<Guid> PetSelected { get; set; }
+    
     protected override void OnInitialized()
     {
         DataService.DataLoaded += StateHasChanged;

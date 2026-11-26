@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using Web_453503.UI.Services.Authentication;
 using Web_453503.UI.Services.PetService;
 
 namespace Web_453503.UI.Services.SpeciesService;
@@ -10,10 +11,12 @@ public class ApiSpeciesService
     readonly HttpClient _httpClient;
     private readonly JsonSerializerOptions _serializerOptions;
     readonly ILogger<ApiSpeciesService> _logger;
+    readonly ITokenAccessor _tokenAccessor;
     
     public ApiSpeciesService(
         HttpClient httpClient,
-        ILogger<ApiSpeciesService> logger)
+        ILogger<ApiSpeciesService> logger,
+        ITokenAccessor tokenAccessor)
     {
         _httpClient = httpClient;
         _serializerOptions = new JsonSerializerOptions()
@@ -21,11 +24,22 @@ public class ApiSpeciesService
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         _logger = logger;
+        _tokenAccessor = tokenAccessor;
     }
     
     public async Task<ResponseData<List<Species>>> GetSpeciesListAsync()
     {
         var urlString= new StringBuilder($"{_httpClient.BaseAddress.AbsoluteUri}");
+        
+        try
+        {
+            await _tokenAccessor.SetAuthorizationHeaderAsync(_httpClient, false);
+        }
+        catch (Exception ex)
+        {
+            return ResponseData<List<Species>>
+                .Error($"Failed to get access token: {ex.Message}");
+        }
         
         var response = await _httpClient.GetAsync(
             new Uri(urlString.ToString()));

@@ -2,26 +2,34 @@
 @attribute [Authorize]
 
 @inject IDataService DataService
+@using Web_453503.Domain.Entities
+@implements IDisposable
 
 <PageTitle>Pets</PageTitle>
 
 <h1>Pets list</h1>
 
-@if (isLoading)
+@if (_isLoading)
 {
     <p>Loading...</p>
 }
 else
 {
     <SpeciesSelector />
-    <PetList />
+    <PetList PetSelected="OnPetSelected" />
+    <Pager CategoryName="@DataService.SelectedSpecies?.NormalizedName" />
+    <PetDetails SelectedPet="@SelectedPet" />
 }
 
 @code {
-    private bool isLoading = true;
+    private bool _isLoading = true;
+    
+    private Pet? SelectedPet { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        DataService.DataLoaded += OnDataLoaded;
+        
         await DataService.GetSpeciesListAsync();
 
         if (DataService.Success)
@@ -29,6 +37,24 @@ else
             await DataService.GetPetsListAsync();   
         }
 
-        isLoading = false;
+        _isLoading = false;
+    }
+    
+    private void OnPetSelected(Guid id)
+    {
+        SelectedPet = DataService.Pets
+            .FirstOrDefault(p => p.Id == id);
+    }
+
+    private void OnDataLoaded()
+    {
+        SelectedPet = null;
+
+        StateHasChanged();
+    }
+    
+    public void Dispose()
+    {
+        DataService.DataLoaded -= OnDataLoaded;
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web_453503.UI.Services.PetService;
 using Web_453503.UI.Services.SpeciesService;
@@ -19,6 +20,7 @@ public class PetController
         _petService = petService;
     }
 
+    [Authorize]
     [Route("{species?}")]
     public async Task<IActionResult> Index(string? species, int page = 1)
     {

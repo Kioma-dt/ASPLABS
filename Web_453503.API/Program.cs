@@ -30,6 +30,17 @@ builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("BlazorClient", policy =>
+    {
+        policy
+            .WithOrigins("https://localhost:7164")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var authServer = builder.Configuration
     .GetSection("AuthServer")
     .Get<AuthServerData>();
@@ -60,6 +71,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("BlazorClient");
 
 app.UseAuthentication();
 app.UseAuthorization();

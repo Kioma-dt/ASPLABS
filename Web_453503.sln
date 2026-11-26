@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_453503.Tests", "Web_453
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_453503.Blazor.SSR", "Web_453503.Blazor.SSR\Web_453503.Blazor.SSR.csproj", "{48A41A7F-F0B1-4E77-8887-E7EF33975795}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_453503.BlazorWasm", "Web_453503.BlazorWasm\Web_453503.BlazorWasm.csproj", "{21DB32C5-9406-4D56-8D24-C668572F3760}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{48A41A7F-F0B1-4E77-8887-E7EF33975795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48A41A7F-F0B1-4E77-8887-E7EF33975795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48A41A7F-F0B1-4E77-8887-E7EF33975795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21DB32C5-9406-4D56-8D24-C668572F3760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21DB32C5-9406-4D56-8D24-C668572F3760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21DB32C5-9406-4D56-8D24-C668572F3760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21DB32C5-9406-4D56-8D24-C668572F3760}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

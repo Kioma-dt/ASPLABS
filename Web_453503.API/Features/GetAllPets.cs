@@ -17,6 +17,7 @@ public static class GetAllPets
         {
             app.MapGet("api/pets/{species?}", Handler)
                 .DisableAntiforgery()
+                .RequireAuthorization()
                 .WithName("GetPets")
                 .WithTags("Pets");
         }

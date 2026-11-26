@@ -47,8 +47,8 @@ public class ApiPetService
         }
         catch (Exception ex)
         {
-            ResponseData<ListModel<Pet>>
-                .Error($"Data not got from server. Error: {ex.Message}");
+            return ResponseData<ListModel<Pet>>
+                .Error($"Failed to get access token: {ex.Message}");
         }
 
         var response = await _httpClient.GetAsync(
